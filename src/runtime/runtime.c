@@ -868,8 +868,12 @@ bool rm_recursive(const char* const path) {
 void build_mount_point(char* mount_dir, const char* const argv0, char const* const temp_base, const size_t templen) {
     const size_t maxnamelen = 6;
 
-    char* path_basename;
-    path_basename = basename(argv0);
+    const char* path_basename = strrchr(argv0, '/');
+    if (path_basename != NULL) {
+        path_basename++;
+    } else {
+        path_basename = argv0;
+    }
 
     size_t namelen = strlen(path_basename);
     // limit length of tempdir name
@@ -902,8 +906,6 @@ int fusefs_main(int argc, char* argv[], void (* mounted)(void)) {
     struct fuse_opt fuse_opts[] = {
             {"offset=%zu", offsetof(sqfs_opts, offset), 0},
             {"timeout=%u", offsetof(sqfs_opts, idle_timeout_secs), 0},
-            {"fsname=%s", "squashfuse", 0},
-            {"subtype=%s", "squashfuse", 0},
             FUSE_OPT_END
     };
 
