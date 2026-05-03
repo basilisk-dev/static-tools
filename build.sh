@@ -31,6 +31,7 @@ apk add zstd-dev zstd-static zlib-dev zlib-static # fuse-dev fuse-static fuse3-s
 wget -c -q "https://github.com/vasi/squashfuse/archive/e51978c.tar.gz"
 tar xf e51978c.tar.gz
 cd squashfuse-*/
+patch -p1 < ../patches/squashfuse/forget-callback.diff
 ./autogen.sh
 ./configure --help
 ./configure CFLAGS=-no-pie LDFLAGS=-static

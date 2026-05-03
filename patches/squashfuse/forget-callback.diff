@@ -1,0 +1,25 @@
+diff --git a/ll.c b/ll.c
+index 5e95cef..d33cfcf 100644
+--- a/ll.c
++++ b/ll.c
+@@ -371,7 +371,7 @@ void sqfs_ll_op_getxattr(fuse_req_t req, fuse_ino_t ino,
+ }
+ 
+ void sqfs_ll_op_forget(fuse_req_t req, fuse_ino_t ino,
+-		unsigned long nlookup) {
++		uint64_t nlookup) {
+ 	sqfs_ll_i lli;
+ 	last_access = time(NULL);
+ 	sqfs_ll_iget(req, &lli, SQFS_FUSE_INODE_NONE);
+diff --git a/ll.h b/ll.h
+index b9ce775..552fdef 100644
+--- a/ll.h
++++ b/ll.h
+@@ -113,7 +113,7 @@ void sqfs_ll_op_getxattr(fuse_req_t req, fuse_ino_t ino,
+ 		);
+ 
+ void sqfs_ll_op_forget(fuse_req_t req, fuse_ino_t ino,
+-		unsigned long nlookup);
++		uint64_t nlookup);
+ 
+ void stfs_ll_op_statfs(fuse_req_t req, fuse_ino_t ino);
