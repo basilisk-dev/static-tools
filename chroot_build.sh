@@ -6,7 +6,7 @@ set -ex
 # Download and extract minimal Alpine system
 #############################################
 
-wget "http://dl-cdn.alpinelinux.org/alpine/v3.19/releases/${ARCHITECTURE}/alpine-minirootfs-3.19.1-${ARCHITECTURE}.tar.gz"
+wget "http://dl-cdn.alpinelinux.org/alpine/v3.21/releases/${ARCHITECTURE}/alpine-minirootfs-3.21.7-${ARCHITECTURE}.tar.gz"
 sudo rm -rf ./miniroot  true # Clean up from previous runs
 mkdir -p ./miniroot
 cd ./miniroot
@@ -40,6 +40,10 @@ elif [ "$ARCHITECTURE" = "armhf" ] ; then
     echo "Architecture is armhf, hence using qemu-arm-static"
     sudo cp "$(which qemu-arm-static)" miniroot/usr/bin
     sudo cp build.sh miniroot/build.sh && sudo chroot miniroot qemu-arm-static /bin/sh -ex /build.sh
+elif [ "$ARCHITECTURE" = "loongarch64" ] ; then
+    echo "Architecture is loongarch64, hence using qemu-loongarch64-static"
+    sudo cp "$(which qemu-loongarch64-static)" miniroot/usr/bin
+    sudo cp build.sh miniroot/build.sh && sudo chroot miniroot qemu-loongarch64-static /bin/sh -ex /build.sh
 else
     echo "Edit chroot_build.sh to support this architecture as well, it should be easy"
     exit 1
