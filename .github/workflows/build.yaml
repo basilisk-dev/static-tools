@@ -5,7 +5,8 @@ on:
     branches:    
       - 'master'
   pull_request:
-  
+  workflow_dispatch:
+
 # This ensures that jobs get canceled when force-pushing
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
