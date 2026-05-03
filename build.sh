@@ -67,10 +67,9 @@ cd -
 
 # Build static zsyncmake
 apk add glib-dev glib-static
-wget http://zsync.moria.org.uk/download/zsync-0.6.2.tar.bz2
+wget https://zsync.moria.org.uk/download/zsync-0.6.3.tar.bz2
 tar xf zsync-*.tar.bz2
 cd zsync-*/
-find . -type f -exec sed -i -e 's|off_t|size_t|g' {} \;
 ./configure CFLAGS=-no-pie LDFLAGS=-static --build=$(arch)-unknown-linux-gnu
 make -j$(nproc)
 file zsync
